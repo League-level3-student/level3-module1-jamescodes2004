@@ -8,7 +8,7 @@ import java.util.Stack;
 import org.junit.Test;
 
 public class _03_TestMatchingBrackets {
-
+	Stack<String> bracketsReal = new Stack<String>();
 	@Test
 	public void testMatchingBrackets() {
 		assertTrue(doBracketsMatch("{}"));
@@ -22,7 +22,29 @@ public class _03_TestMatchingBrackets {
 	private boolean doBracketsMatch(String brackets) {
 		
 		//1. Use a for loop to iterate through your brackets String 
-
+for (int i = 0; i < brackets.length(); i++) {
+	if(brackets.charAt(i)==('{')){
+		bracketsReal.push("{");}
+		else if(brackets.charAt(i)==('}')) {
+			if(bracketsReal.isEmpty()) {
+				
+				return false;
+			
+			}
+			
+			if(!bracketsReal.isEmpty()) {
+				bracketsReal.pop();
+			}
+			
+		
+	}
+}
+if(bracketsReal.isEmpty()) {
+	return true;
+}
+if(!bracketsReal.isEmpty()) {
+	return false;
+}
     			//2.  If the current character is an '{'
 
         			//3.  Push an '{' onto the stack 

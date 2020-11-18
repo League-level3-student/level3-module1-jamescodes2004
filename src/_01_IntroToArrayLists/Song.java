@@ -1,18 +1,29 @@
 package _01_IntroToArrayLists;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
-public class Song {
+public class Song implements MouseListener {
 	private int duration;
 	private String songAddress;
 	private AdvancedPlayer mp3Player;
 	private InputStream songStream;
-
+	JFrame frame= new JFrame();
+	JPanel panel = new JPanel();
+	JButton button = new JButton();
+	ArrayList<String> songs = new ArrayList<String>();
 	/**
 	 * Songs can be constructed from files on your computer or Internet addresses. *
 	 * Examples: <code>
@@ -26,12 +37,15 @@ public class Song {
 	}
 
 	public void play() {
+		frame.add(panel);
+		panel.add(button);
+		button.setText("random song");
+		button.addMouseListener(this);
+		frame.setVisible(true);
+		songs.add("Kalimba.mp3");
+		songs.add("demo.mp3");
 		loadFile();
-		if (songStream != null) {
-			loadPlayer();
-			startSong();
-		} else
-			System.err.println("Unable to load file: " + songAddress);
+
 	}
 
 	public void setDuration(int seconds) {
@@ -88,5 +102,41 @@ public class Song {
 		} catch (FileNotFoundException e) {
 			return this.getClass().getResourceAsStream(songAddress);
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		Random rand = new Random();
+		songAddress=songs.get(rand.nextInt(2));
+		if (songStream != null) {
+			loadPlayer();
+			startSong();
+		} else
+			System.err.println("Unable to load file: " + songAddress);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
